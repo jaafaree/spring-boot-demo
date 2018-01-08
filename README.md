@@ -1,2 +1,4 @@
 # sb-demo
-learning
+ - redis cache
+ - analysis (`ansj`)
+ - web common
