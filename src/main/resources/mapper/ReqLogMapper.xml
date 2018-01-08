@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.jaafar.l.demo.mapper.ReqLogMapper" >
+  <resultMap id="BaseResultMap" type="com.github.jaafar.l.demo.entity.ReqLog" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="client_ip" property="clientIp" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="return_time" property="returnTime" jdbcType="VARCHAR" />
+    <result column="status_code" property="statusCode" jdbcType="VARCHAR" />
+    <result column="time_consuming" property="timeConsuming" jdbcType="INTEGER" />
+    <result column="uri" property="uri" jdbcType="LONGVARCHAR" />
+    <result column="param_data" property="paramData" jdbcType="LONGVARCHAR" />
+    <result column="session_id" property="sessionId" jdbcType="LONGVARCHAR" />
+    <result column="return_data" property="returnData" jdbcType="LONGVARCHAR" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: sb-demo
+  datasource:
+      name: test
+      url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF8
+      username: root
+      password: 123456
+      # 使用druid数据源
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+#redis-cache 相关
+redis:
+    pool:
+         maxActive: 300
+         maxIdle: 100
+         maxWait: 1000
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 2000
+    # 服务或应用名
+    sysName: sb-demo
+    enable: true
+    database: 0
+
+mybatis:
+    basepackage: com.github.jaafar.l.demo.mapper
+    xmlLocation: classpath:mapper/**/*.xml
+
+authorize:
+  token-header: Authorization
+  exclude-uris: /static/**,/login/**,/error/**,/cache/**
+  expire: 3600
+  pri-key:
+    path: jwt/pri.key
+  pub-key:
+    path: jwt/pub.key
+
+logging:
+  level:
+    #tk.mybatis: DEBUG
+    com.github.jaafar.l.demo: DEBUG
+
+

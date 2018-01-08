@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.jaafar.l.demo.mapper.CnUserMapper" >
+  <resultMap id="BaseResultMap" type="com.github.jaafar.l.demo.entity.CnUser" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="crt_time" property="crtTime" jdbcType="VARCHAR" />
+    <result column="crt_usr" property="crtUsr" jdbcType="VARCHAR" />
+    <result column="crt_host" property="crtHost" jdbcType="VARCHAR" />
+    <result column="upd_time" property="updTime" jdbcType="VARCHAR" />
+    <result column="upd_usr" property="updUsr" jdbcType="VARCHAR" />
+    <result column="upd_host" property="updHost" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <select id="getUserExistByUsername" resultType="java.lang.Integer">
+     select IFNULL(COUNT(1),0) from cn_user cu WHERE cu.username= #{username} AND cu.`status`='1'
+  </select>
+</mapper>
