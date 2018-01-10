@@ -37,13 +37,20 @@ redis:
     enable: true
     database: 0
 
+swagger:
+    basepackage: com.github.jaafar.l.demo
+    service:
+        name: Spring Boot Demo
+        description: Spring Boot Demo
+        developer: jaafar
+
 mybatis:
     basepackage: com.github.jaafar.l.demo.mapper
     xmlLocation: classpath:mapper/**/*.xml
 
 authorize:
   token-header: Authorization
-  exclude-uris: /static/**,/login/**,/error/**,/cache/**
+  exclude-uris: /static/**,/login/**,/error/**,/cache/**,/swagger-resources/**,/v2/api-docs
   expire: 3600
   pri-key:
     path: jwt/pri.key
@@ -53,6 +60,6 @@ authorize:
 logging:
   level:
     #tk.mybatis: DEBUG
-    com.github.jaafar.l.demo: DEBUG
+    com.github.jaafar.l.demo: INFO
 
 

@@ -1,9 +1,9 @@
 package com.github.jaafar.l.demo.utils;
 
 import com.ace.cache.service.ICacheManager;
-import com.github.jaafar.l.common.exception.auth.JwtIllegalArgumentException;
-import com.github.jaafar.l.common.exception.auth.JwtSignatureException;
-import com.github.jaafar.l.common.exception.auth.JwtTokenExpiredException;
+import com.github.jaafar.l.demo.exs.jwt.JwtIllegalArgumentException;
+import com.github.jaafar.l.demo.exs.jwt.JwtSignatureException;
+import com.github.jaafar.l.demo.exs.jwt.JwtTokenExpiredException;
 import com.github.jaafar.l.common.utils.auth.IJWTInfo;
 import com.github.jaafar.l.common.utils.auth.JWTHelper;
 import com.github.jaafar.l.demo.exs.TokenLogoutException;

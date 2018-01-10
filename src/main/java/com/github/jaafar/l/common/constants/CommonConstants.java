@@ -16,7 +16,11 @@ public class CommonConstants {
 
     public static final Integer EX_USER_INVALID_CODE = 40202;
     public static final Integer EX_USER_NOTFOUND_CODE = 40203;
+
+    public static final Integer EX_RATELIMIT_CODE = 20101;
+
     public static final Integer EX_OTHER_ERROR_CODE = 500;
+
 
     public static final String LOG_SEND_TIME = "_send_time";
     public static final String LOG_SEND_ENTITY = "_send_entity";
@@ -29,4 +33,6 @@ public class CommonConstants {
     public static final String CONTEXT_KEY_USER_NAME = "currentUsername";
     public static final String CONTEXT_KEY_NAME = "currentName";
     public static final String CONTEXT_KEY_USER_TOKEN = "currentUserToken";
+    public static final String CONTEXT_USER_IP = "currentUserIP";
+    public static final String CONTEXT_USER_URI = "currentUserURI";
 }

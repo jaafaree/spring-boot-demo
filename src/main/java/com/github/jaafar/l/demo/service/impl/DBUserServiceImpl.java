@@ -1,13 +1,13 @@
 package com.github.jaafar.l.demo.service.impl;
 
 import com.ace.cache.annotation.Cache;
-import com.github.jaafar.l.demo.utils.AuthorizeUtil;
 import com.github.jaafar.l.common.utils.auth.JWTInfo;
 import com.github.jaafar.l.demo.biz.CnUserBiz;
 import com.github.jaafar.l.demo.entity.CnUser;
 import com.github.jaafar.l.demo.exs.UserInvalidException;
 import com.github.jaafar.l.demo.exs.UserNotFoundException;
 import com.github.jaafar.l.demo.service.IUserService;
+import com.github.jaafar.l.demo.utils.AuthorizeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,13 +38,11 @@ public class DBUserServiceImpl implements IUserService {
             throw new UserNotFoundException("User:" + username + " Not Found!");
         }
         if (!"1".equals(cnUser.getStatus())){
-            //throw new UserNotFoundException("User:" + username + " Not Found!");
             throw new UserNotFoundException("User:" + username + " is Frozen!");
         }
         if (!cnUser.getPassword().equals(password)){
             throw new UserInvalidException("User password error!");
         }
-        //log.info(BaseContextHandler.toString());
         String token = authorizeUtil.generateToken(new JWTInfo(cnUser.getUsername(),cnUser.getId().toString(),cnUser.getName()));
         return token;
     }

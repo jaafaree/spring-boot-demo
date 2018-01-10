@@ -1,4 +1,4 @@
-package com.github.jaafar.l.common.exception.auth;
+package com.github.jaafar.l.demo.exs.jwt;
 
 import com.github.jaafar.l.common.constants.CommonConstants;
 import com.github.jaafar.l.common.exception.BaseException;
