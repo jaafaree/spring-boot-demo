@@ -11,7 +11,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * ${DESCRIPTION}
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Aspect
-@Service
+@Component
 public class RateLimitAspect {
     @Value("${redis.sysName}")
     private String sysName;
@@ -46,7 +46,9 @@ public class RateLimitAspect {
         }
         String ip = currentUserIP.toString();
         String url = currentUserUri.toString();
-        String key = sysName + ":ratelimits:".concat(url.replaceAll("\\/", "y")).concat(ip.replaceAll(":", "z"));
+        String key = sysName + ":ratelimits:"
+                .concat(url.replaceAll("\\/", "y"))
+                .concat(ip.replaceAll(":", "z"));
         if(cacheManager.get(key)==null){
             cacheAPI.set(key, 1, limit.time());
             log.info("------------------" + key + "已缓存----------------");

@@ -2,7 +2,10 @@
 - redis cache
 - analysis (`ansj`)
 - web common
+- req log
 - token的强制过期逻辑实现（即注销）
 - swagger
 - logback
-- 基于AOP和Annotation的@RateLimit
+- 基于AOP和Annotation
+    - @RateLimit接口限流
+    - @TargetDataSource接口层的动态数据源切换

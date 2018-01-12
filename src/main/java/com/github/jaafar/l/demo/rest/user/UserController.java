@@ -3,6 +3,7 @@ package com.github.jaafar.l.demo.rest.user;
 import com.github.jaafar.l.common.VO.ObjectRestResponse;
 import com.github.jaafar.l.common.context.BaseContextHandler;
 import com.github.jaafar.l.demo.biz.CnUserBiz;
+import com.github.jaafar.l.demo.config.datasource.TargetDataSource;
 import com.github.jaafar.l.ratelimiter.RateLimit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class UserController {
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     @RateLimit(count = 10)
+    @TargetDataSource(name = "slave")
     public ObjectRestResponse getUserExsitByUsernames(@PathVariable String username){
         String name = BaseContextHandler.getName();
         log.info("=============> 当前操作用户名称：" + name);

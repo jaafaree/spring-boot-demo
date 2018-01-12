@@ -16,7 +16,7 @@ import tk.mybatis.spring.mapper.MapperScannerConfigurer;
  * @create 2018/1/2 13:10
  */
 @Configuration
-@AutoConfigureAfter(MybatisConfiguration.class)
+@AutoConfigureAfter(DataSourceConfiguration.class)
 public class MapperConfiguration implements EnvironmentAware {
 
     private RelaxedPropertyResolver propertyResolver;
@@ -36,6 +36,6 @@ public class MapperConfiguration implements EnvironmentAware {
     @Override
     public void setEnvironment(Environment environment) {
         this.propertyResolver = new RelaxedPropertyResolver(environment, null);
-        this.basePackage = propertyResolver.getProperty("mybatis.basepackage");
+        this.basePackage = propertyResolver.getProperty("mybatis.type-aliases-package");
     }
 }
