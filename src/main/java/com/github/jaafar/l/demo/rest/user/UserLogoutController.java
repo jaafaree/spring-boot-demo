@@ -24,7 +24,7 @@ public class UserLogoutController {
     private IUserService iUserService;
     @Autowired
     private AuthorizeUtil authorizeUtil;
-    @RequestMapping(value = "/**", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ObjectRestResponse logout() throws Exception {
         String token = BaseContextHandler.getToken();
         int expireMins = authorizeUtil.getExpireMins(token);

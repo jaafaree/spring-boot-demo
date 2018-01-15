@@ -33,7 +33,7 @@ public class DynamicDataSourceAspect {
 
     @After("@annotation(ds)")
     public void restoreDataSource(JoinPoint point, TargetDataSource ds) {
-        log.debug("Revert DataSource : {} > {}", ds.name(), point.getSignature());
+        log.info("Revert DataSource : {} > {}", ds.name(), point.getSignature());
         DynamicDataSourceContextHolder.clearDataSourceKey();
     }
 }
