@@ -3,9 +3,11 @@ package com.github.jaafar.l.demo.interceptor;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.jaafar.l.common.constants.CommonConstants;
+import com.github.jaafar.l.common.context.BaseContextHandler;
 import com.github.jaafar.l.demo.biz.ReqLogBiz;
 import com.github.jaafar.l.demo.entity.ReqLog;
 import com.github.jaafar.l.demo.utils.ReqLogUtils;
+import com.google.common.net.HttpHeaders;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -27,6 +29,8 @@ public class ReqLogInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        BaseContextHandler.set(CommonConstants.CONTEXT_USER_IP, getRemoteAddr(request));
+        BaseContextHandler.set(CommonConstants.CONTEXT_USER_URI, request.getRequestURI());
         ReqLog reqLog = new ReqLog();
         reqLog.setUri(request.getRequestURI());
         String paramData = JSON.toJSONString(request.getParameterMap(),
@@ -63,6 +67,7 @@ public class ReqLogInterceptor extends HandlerInterceptorAdapter {
 
         ReqLogBiz reqLogBiz = getBiz(ReqLogBiz.class, request);
         reqLogBiz.insert(reqLog);
+        BaseContextHandler.remove();
         super.afterCompletion(request, response, handler, ex);
     }
 
@@ -79,5 +84,11 @@ public class ReqLogInterceptor extends HandlerInterceptorAdapter {
     private <T> T getBiz(Class<T> clazz,HttpServletRequest request) {
         BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
         return factory.getBean(clazz);
+    }
+    private String getRemoteAddr(final HttpServletRequest request) {
+        if (request.getHeader(HttpHeaders.X_FORWARDED_FOR) != null) {
+            return request.getHeader(HttpHeaders.X_FORWARDED_FOR);
+        }
+        return request.getRemoteAddr();
     }
 }

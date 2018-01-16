@@ -1,10 +1,8 @@
 package com.github.jaafar.l.demo.interceptor;
 
-import com.github.jaafar.l.common.constants.CommonConstants;
 import com.github.jaafar.l.common.context.BaseContextHandler;
 import com.github.jaafar.l.common.utils.auth.IJWTInfo;
 import com.github.jaafar.l.demo.utils.AuthorizeUtil;
-import com.google.common.net.HttpHeaders;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,8 +33,6 @@ public class AuthorizeInterceptor extends HandlerInterceptorAdapter {
         BaseContextHandler.setName(infoFromToken.getName());
         BaseContextHandler.setUserId(infoFromToken.getId());
         BaseContextHandler.setToken(token);
-        BaseContextHandler.set(CommonConstants.CONTEXT_USER_IP, getRemoteAddr(request));
-        BaseContextHandler.set(CommonConstants.CONTEXT_USER_URI, request.getRequestURI());
         return super.preHandle(request, response, handler);
     }
 
@@ -44,12 +40,5 @@ public class AuthorizeInterceptor extends HandlerInterceptorAdapter {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         BaseContextHandler.remove();
         super.afterCompletion(request, response, handler, ex);
-    }
-
-    private String getRemoteAddr(final HttpServletRequest request) {
-        if (request.getHeader(HttpHeaders.X_FORWARDED_FOR) != null) {
-            return request.getHeader(HttpHeaders.X_FORWARDED_FOR);
-        }
-        return request.getRemoteAddr();
     }
 }

@@ -28,16 +28,19 @@ import java.util.List;
 public class ApplicationInit implements CommandLineRunner {
     @Value("${redis.sysName}")
     private String sysName;
+    @Value("${redis.default-expire}")
+    private int defaultExpire;
     @Autowired
     private CnUserBiz cnUserBiz;
     @Autowired
     private CacheRedis cacheRedis;
     @Override
     public void run(String... strings) throws Exception {
+        cacheRedis.removeByPre(sysName);
         List<CnUser> cnUsers = cnUserBiz.selectListAll();
         for (CnUser cnUser : cnUsers){
-            cacheRedis.set(sysName + ":users:" + cnUser.getUsername(), cnUser, 5256000);
+            cacheRedis.set(sysName + ":users:" + cnUser.getUsername(), cnUser, defaultExpire);
         }
-        log.info("======== CnUser Cached Success! ========");
+        log.info("======== Users cached success! ========");
     }
 }

@@ -23,6 +23,6 @@
     <result column="status" property="status" jdbcType="CHAR" />
   </resultMap>
   <select id="getUserExistByUsername" resultType="java.lang.Integer">
-     select IFNULL(COUNT(1),0) from cn_user cu WHERE cu.username= #{username} AND cu.`status`='1'
+     select IFNULL(COUNT(1),0) from cn_user cu WHERE cu.username= #{username}
   </select>
 </mapper>
