@@ -16,3 +16,4 @@
 # 说明
 
 # TODOLIST
+    [ ] Global Exception handler
